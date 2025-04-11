@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="main.css" />
+    <title>Menú de Emotes</title>
+</head>
+
+<body>
+    <div class="container" id="app" v-if="opened">
+        <input type="text" class="searchbar" placeholder="Buscar Animación..." v-model="search" />
+        <div class="categories">
+            <div class="cat" :class="{ active: selectedCategory === 'Gestos' }" @click="setTempList('Gestos')">
+                <i class="fa-solid fa-file icono-cat"></i>
+            </div>
+            <div class="cat" :class="{ active: selectedCategory === 'Bailes' }" @click="setTempList('Bailes')">
+                <i class="fa-solid fa-music icono-cat"></i>
+            </div>
+            <div class="cat" :class="{ active: selectedCategory === 'Objetos' }" @click="setTempList('Objetos')">
+                <i class="fa-solid fa-sign-hanging icono-cat"></i>
+            </div>
+            <div class="cat" :class="{ active: selectedCategory === 'Formas de caminar' }"
+                @click="setTempList('Formas de caminar')">
+                <i class="fa-solid fa-person-walking icono-cat"></i>
+            </div>
+            <div class="cat" :class="{ active: selectedCategory === 'Compartidas' }"
+                @click="setTempList('Compartidas')">
+                <i class="fa-solid fa-user-group icono-cat"></i>
+            </div>
+        </div>
+        <div class="emotes">
+            <div class="emote" v-for="anim in filteredItems" :key="anim.value"
+                :class="{ active: activeAnim && activeAnim.value === anim.value }" @click="makeAnimation(anim)">
+                <div class="emote-title">{{ anim.label }}</div>
+                <div class="emote-command">
+                    <span>/{{ anim.prefix }}</span> {{ anim.value }}
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+
+</html>
